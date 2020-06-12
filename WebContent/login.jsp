@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Retail Banking</title>
+<title>ABC Bank</title>
 <link href="resources/css/login.css" rel="stylesheet">
 </head>
 <body>
