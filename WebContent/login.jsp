@@ -15,7 +15,7 @@
 <h1 style="text-align: center;">Welcome to The Retail Banking</h1>
 <form action="UserController" method="post">
 
-    <fieldset align="center">
+    <fieldset style="text-align:center;">
         <h3>Login here</h3><hr>
         <br>
         <label for="userName">User name</label>
