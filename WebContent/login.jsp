@@ -11,6 +11,8 @@
 
 
 <div class="rsPgae">
+
+<h1 style="text-align: center;">Welcome to The Retail Banking</h1>
 <form action="UserController" method="post">
 
     <fieldset align="center">
