@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,29 +10,31 @@
 <body>
 
 
-<div class="rsPgae">
+	<div class="rsPgae">
 
-<h1 style="text-align: center;">Welcome to The Retail Banking</h1>
-<form action="UserController" method="post">
+		<h1 style="text-align: center;">Welcome to The Retail Banking</h1>
+		<form action="UserController" method="post">
 
-    <fieldset style="text-align:center;">
-        <h3>Login here</h3><hr>
-        <br>
-        <label for="userName">User name</label>
-        <input type="text" name="userName">
-        <br>
-        <br>
-        <label for="password">password</label>
-        <input type="password" name="password"><br>
-        <br>
-        <input type="submit" value="Login"> 
-         <input type="hidden" name="action" value="login">
-        
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
-    </fieldset>
-</form>
+			<fieldset >
+				<h3>Login here</h3>
+				<hr>
+				<br> <input type="text" name="userName" placeholder="UserName" style="text-align:center; ">
+				<br> 
+				<br> <input type="password" name="password"	placeholder="Password" style="text-align:center; ">
+				<br> 
+				<br> 
+				<input type="submit" value="Login"> <input type="hidden" name="action" value="login">
 
-</div>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			</fieldset>
+		</form>
+
+	</div>
 </body>
+<br>
+<br>
+<footer>
+	<strong> Copyright &copy2020 by ABC Retail Bank </strong>
+</footer>
 </html>

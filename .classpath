@@ -17,5 +17,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="G:/sqlite-tools-win32-x86-3320100/sqlite-jdbc-3.7.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
