@@ -1,6 +1,9 @@
 package com.banking.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +19,7 @@ import com.banking.services.UserService;
 @WebServlet("/UserController")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
     
     public UserController() {
         super();
@@ -29,29 +33,45 @@ public class UserController extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		PrintWriter out = response.getWriter();
 		UserService service = new UserService();
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
 		if(action.equalsIgnoreCase("login"))
 		{
-			String uname=request.getParameter("userName");
-			String pass = request.getParameter("password");
-			int id = service.login(uname, pass);
-			System.out.println(id);
-			if(id>0)
-			{
+			String userName=request.getParameter("userName");
+			String password = request.getParameter("password");
+			try {
+				Map<String,String> userRoles = service.validate(userName, password);
+				System.out.println(userRoles);
 				
-				session.setAttribute("id",id);
-			 	RequestDispatcher rd = request.getRequestDispatcher("display.jsp");
-			 	rd.forward(request, response);
+				if(userRoles==null || userRoles.isEmpty())
+				{
+					
+					response.sendRedirect("login.jsp");
+				}
+				
+				else
+				{
+					if(userRoles.get("userRole").equalsIgnoreCase("EXCECUTIVE"))
+					{
+						request.setAttribute("userRoles", userRoles);
+						RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					 	rd.forward(request, response);	
+					}
+					else
+					{
+						RequestDispatcher rd = request.getRequestDispatcher("cashier.jsp");
+					 	rd.forward(request, response);
+					}
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			else
-			{
-				RequestDispatcher rd = request.getRequestDispatcher("Login.jsp");
-			 	rd.forward(request, response);
-			}
+			
+			
 		}
 	}
 
