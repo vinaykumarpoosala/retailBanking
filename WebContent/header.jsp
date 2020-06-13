@@ -20,19 +20,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="home.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      
+          
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" 
         aria-haspopup="true" aria-expanded="false">
@@ -51,11 +39,38 @@
           Account Management
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Create Account</a>
+          <a class="dropdown-item" href="#">Delete Account</a>
         </div>
       </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Status Details
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">All Account</a>
+          <a class="dropdown-item" href="#">Account Details</a>
+        </div>
+      </li>
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account Operations
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Deposit Amount</a>
+          <a class="dropdown-item" href="#">Withdraw Amount</a>
+          <a class="dropdown-item" href="#">Transfer Account</a>
+        </div>
+      </li>
+      
+      <li class="nav-item ">
+        <a class="nav-link" href="home.jsp">Logout</a>
+      </li>
+      
     </ul>
   </div>
 </nav>

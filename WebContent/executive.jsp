@@ -13,7 +13,7 @@
 <%@ include file="header.jsp" %><hr>
 
 	<h1 style="text-align: center;">Create Customer Data</h1>
-	
+	<hr><br>
 	<div>
 
 		<form>
