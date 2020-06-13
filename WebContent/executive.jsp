@@ -11,9 +11,9 @@
 </head>
 <body>
 <%@ include file="header.jsp" %><hr>
-	<br>
+
 	<h1 style="text-align: center;">Create Customer Data</h1>
-	<hr>
+	
 	<div>
 
 		<form>
