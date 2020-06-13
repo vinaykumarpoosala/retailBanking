@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@ page import="java.util.*"%>
+<%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +10,12 @@
 <link href="resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="header.jsp" %><hr>
+	<%@ include file="header.jsp" %>
 
-	<h1 style="text-align: center;">Create Customer Data</h1>
-	<hr><br>
+	<br>
+	<h3 style="text-align: center;">Create Customer Data</h3>
+	<br>
+
 	<div>
 
 		<form>
@@ -22,25 +24,26 @@
 
 				<tr>
 					<td class="label">Customer SSN Id</td>
-					<td class="value"><input id="snnid" name="ssnid" type="text"
-						placeholder="1234 1234 1234 1234" required></td>
+					<td class="value"><input class="form-control" id="snnid"
+						name="ssnid" type="text" placeholder="1234 1234"
+						required></td>
 				</tr>
 
 				<tr>
 					<td class="label">Customer Name</td>
-					<td class="value"><input id="customer_id" name="customer_id"
-						type="text" required></td>
+					<td class="value"><input class="form-control" id="customer_id"
+						name="customer_id" type="text" required></td>
 				</tr>
 
 				<tr>
 					<td class="label">Age</td>
-					<td class="value"><input id="age" name="age" type="number"
-						required></td>
+					<td class="value"><input class="form-control" id="age"
+						name="age" type="number" required></td>
 				</tr>
 				<tr>
 					<td class="label">Address</td>
-					<td class="value"><input id="address" name="address"
-						type="text" required></td>
+					<td class="value"><input class="form-control" id="address"
+						name="address" type="text" required></td>
 				</tr>
 
 				<tr>
@@ -65,16 +68,15 @@
 
 			</table>
 			<span style="text-align: center; color: red; position: bottom;">All
-				Fields are compulsory</span><br>
-			<br>
+				Fields are compulsory</span><br> <br>
 			<div>
-				<input type="submit" value="Submit"> <input type="button"
-					value="Reset">
+				<button type="button" class="btn btn-dark">Submit</button>
+				<button type="button" class="btn btn-dark pl-2">Reset</button>
 			</div>
 		</form>
 
 	</div>
-
+<%@ include file="footer.jsp" %>
 
 </body>
 

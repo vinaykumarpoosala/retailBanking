@@ -6,11 +6,32 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>ABC Bank</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+	<link href="resources/css/login.css" rel="stylesheet">
+<link href="resources/css/style.css" rel="stylesheet">
+	
 </head>
 <body>
-	<%@ include file="header.jsp"%><hr>
 
-	<div class="main">
+	<div class="container-fluid nav-01">
+		<div class="container pt-3">
+			<!--first navbar  -->
+			<nav class="navbar navbar-expand-lg navbar-light bg-dark p-0 mb-3">
+				<div class="container nav-01 pl-0">
+					<h2>
+						<strong><span>ABC</span><span class="text-white pl-2">Bank
+						</span></strong>
+					</h2>
+					<br>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="container">
 		<h1>Home Page</h1>
 		<main role="main">
 			<div class="jumbotron">
@@ -39,10 +60,21 @@
 			</div>
 		</main>
 	</div>
-</body>
+	<div class="copyrighttt">
+		<div class="container-fluid">
+			<div class="row">
 
-<footer>
-	<strong> Copyright &copy2020 by ABC Retail Bank </strong>
-</footer>
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="copyright">
+						<p>
+							<strong>Copyright &copy2020 by ABC Retail Bank</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
 
 </html>

@@ -6,9 +6,11 @@
 <meta charset="ISO-8859-1">
 <title>ABC Bank</title>
 <link href="resources/css/login.css" rel="stylesheet">
+<link href="resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
+<div class="container">
 	<div class="rsPgae">
 
 		<h1 style="text-align: center;">Welcome to ABC Banking</h1>
@@ -42,11 +44,23 @@
 		</form>
 	</div>
 	<script type="text/javascript" src="resources/js/login.js"></script>
+
+	<div class="copyrighttt">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="copyright">
+						<p>
+							<strong>Copyright &copy2020 by ABC Retail Bank</strong>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
-<br>
-<br>
-<footer>
-	<strong> Copyright &copy2020 by ABC Retail Bank </strong>
-</footer>
 
 </html>

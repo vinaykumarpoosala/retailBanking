@@ -1,23 +1,58 @@
 @charset "ISO-8859-1";
 
-.label{
-	text-align:left;
+.container-fluid {
+	padding: 0px !important;
 }
-.value{
-	text-align:right;
+
+.label {
+	text-align: left;
 }
-table{
-	margin-left:auto;
-	margin-right:auto;
+
+.value {
+	text-align: right;
 }
-.nav{
-	margin-right: 10%;
-	margin-left: 10%;
+
+table {
+	margin-left: auto;
+	margin-right: auto;
 }
-.main{
-	margin-right: 10%;
-	margin-left: 10%;
+
+.nav-01 {
+	background-color: black;
+	color: yellow !important;
 }
-body{
-	background-color: #e6e3ef;
+
+html, 
+body {
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overscroll-behavior-y: auto;
+	background: linear-gradient(to bottom, rgb(150, 150, 146),
+		rgba(255, 255, 252, 0.22));
+}
+
+.copyrighttt {
+position: fixed;
+    bottom: 0;
+    float: left;
+    width: 100%;
+}
+.copyright {
+    float: left;
+    width: 100%;
+  padding:10px 55px;
+  text-align: center;
+  background-color: #71dff5;
+}
+ul{
+	list-style-type:none;
+	margin-left:0;
+}
+
+ul li{
+	margin-left:0;
+	padding-left:0;
+	display:block;
+
 }
