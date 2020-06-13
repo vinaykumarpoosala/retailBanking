@@ -1,8 +1,11 @@
 package com.banking.beans;
 
 public class Customer {
-	int ssnid;
-	String name;
+	
+	String customerId;
+	
+	String ssnid;
+	String customername;
 	int age;
 	String address;
 	String state;
@@ -22,11 +25,11 @@ public class Customer {
 	public void setWithdraw(int withdraw) {
 		this.withdraw = withdraw;
 	}
-	public int getSsnid() {
+	public String getSsnid() {
 		return ssnid;
 	}
-	public String getName() {
-		return name;
+	public String getCustomername() {
+		return customername;
 	}
 	public int getAge() {
 		return age;
@@ -40,11 +43,11 @@ public class Customer {
 	public String getCity() {
 		return city;
 	}
-	public void setSsnid(int ssnid) {
+	public void setSsnid(String ssnid) {
 		this.ssnid = ssnid;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String customername) {
+		this.customername = customername;
 	}
 	public void setAge(int age) {
 		this.age = age;
@@ -58,11 +61,22 @@ public class Customer {
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public void setCustomername(String customername) {
+		this.customername = customername;
+	}
 
-	public Customer(int ssnid, String name, int age, String address, String state, String city) {
+
+	public Customer(String ssnid, String customername, int age, String address, String state, String city) {
 		super();
 		this.ssnid = ssnid;
-		this.name = name;
+		this.customername = customername;
 		this.age = age;
 		this.address = address;
 		this.state = state;
