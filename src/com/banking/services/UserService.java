@@ -1,9 +1,21 @@
 package com.banking.services;
 
-public class UserService {
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
-	public int login(String uname, String pass) {
-		return 1;
+import com.banking.dao.UserDao;
+
+public class UserService {
+	UserDao dao = new UserDao();
+
+	public Map<String,String> validate(String uname, String pass) throws SQLException 
+	{
+		
+		Map<String,String> userDetails = new HashMap<String,String>();
+		userDetails = dao.validate(uname,pass);
+		
+		return userDetails;
 	}
 
 }
