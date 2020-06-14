@@ -42,7 +42,7 @@
 				</p>
 			</div>
 		</form>
-	</div>
+	</div><br>
 	<script type="text/javascript" src="resources/js/login.js"></script>
 
 	<div class="copyrighttt">

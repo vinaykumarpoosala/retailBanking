@@ -14,10 +14,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<footer>
 	<div class="copyrighttt">
 		<div class="container-fluid">
-			<div class="row copyright">
+			<div class="row copyright m-0">
 				<div class="col-md-5 col-sm-12">
 					<h1>About Us</h1>
 					<p style="text-align: justify;">ABC Bank was founded on 14th
@@ -56,6 +56,6 @@
 		</div>
 
 	</div>
-
+</footer>
 </body>
 </html>
