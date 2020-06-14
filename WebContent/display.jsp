@@ -12,6 +12,10 @@
 <%@ include file="header.jsp" %>
 <h3>Display Message:</h3>
 
+<% String message = (String)request.getAttribute("customerId") ;%>
+<% if(message!="") {%>
+<p><%= message%></p>
+<% } %>
 <%@ include file="footer.jsp" %>
 </body>
 </html>

@@ -53,8 +53,9 @@
 									Management </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="executive.jsp">Create
-										Customer</a> <a class="dropdown-item" href="#">Update Customer</a>
-									<a class="dropdown-item" href="#">Delete Customer</a>
+										Customer</a> 
+									<a class="dropdown-item" href="edit_cust.jsp">Update Customer</a>
+									<a class="dropdown-item" href="del_cust.jsp">Delete Customer</a>
 								</div></li>
 						</ul>
 					</a>

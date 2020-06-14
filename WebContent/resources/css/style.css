@@ -16,6 +16,11 @@ table {
 	margin-left: auto;
 	margin-right: auto;
 }
+form {
+	margin-right: 25%;
+	margin-left: 25%;
+	text-align: center;
+}
 
 .nav-01 {
 	background-color: black;
