@@ -12,6 +12,11 @@ public class Customer {
 	String city;
 	int deposit;
 	int withdraw;
+	
+	public Customer()
+	{
+		
+	}
 
 	public int getDeposit() {
 		return deposit;

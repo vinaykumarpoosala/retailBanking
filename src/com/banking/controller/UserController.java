@@ -17,22 +17,24 @@ import javax.servlet.http.HttpSession;
 import com.banking.beans.Customer;
 import com.banking.services.UserService;
 
-
 @WebServlet("/UserController")
 public class UserController extends HttpServlet {
 	Customer customer = null;
-		
-	
 	private static final long serialVersionUID = 1L;
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		/*
+		 * response.getWriter().append("Served at: ").append(request.getContextPath());
+		 * HttpSession session = request.getSession(); String action =
+		 * request.getParameter("action");
+		 * 
+		 * if (action.equalsIgnoreCase("logout")) { session.removeAttribute("TOKEN");
+		 * session.invalidate(); response.sendRedirect("login.jsp"); }
+		 */
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		UserService service = new UserService();
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
@@ -41,6 +43,8 @@ public class UserController extends HttpServlet {
 		{
 			String userName=request.getParameter("userName");
 			String password = request.getParameter("password");
+			if(userName!=null || password !=null ) 
+			{
 			try {
 				Map<String,String> userRoles = service.validate(userName, password);
 				System.out.println(userRoles);
@@ -58,21 +62,31 @@ public class UserController extends HttpServlet {
 						session.setAttribute("TOKEN",userRoles.get("userId"));
 						RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
 					 	rd.forward(request, response);	
+					 	response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
+
+
 					}
 					else
 					{
+					 	response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
+
 						session.setAttribute("TOKEN",userRoles.get("userId"));
 						RequestDispatcher rd = request.getRequestDispatcher("cashier.jsp");
 					 	rd.forward(request, response);
 					}
 					
 				}
-			} catch (SQLException e) {
+			}
+			 catch (SQLException e) {
 				e.printStackTrace();
 			}
+			}
+			else
+				request.setAttribute("errorMessage","invalid credentials");
 			
 			
 		}
+		
 		
 		
 		
@@ -124,36 +138,15 @@ public class UserController extends HttpServlet {
 			{
 				e.printStackTrace();
 			}
-			
-			
 		}
-		
-		//UserController/action=serach?SSNID=value
-		
-		if(action.equalsIgnoreCase("search"))
-		{
-			String ssnId = (String)request.getParameter("SSNID");
-			String cid = (String)request.getParameter("customer_id");
-			Map<String,String> searchCreteria = new HashMap<String, String>();
-			searchCreteria.put("SSNID",ssnId);
-			searchCreteria.put("customer_id",cid);
-			try {
-				customer = service.searchCustomer(searchCreteria);
-				if(customer!=null)
-				{
-					request.setAttribute("customer", customer);
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 			
 			
-		}
-
+		
+		
+		
+		
 		
 		
 	}
 
-	
-	
 }

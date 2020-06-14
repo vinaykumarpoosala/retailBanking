@@ -49,6 +49,7 @@ public class UserDao {
 
 			return userDetails;
 		}
+		
 
 		return userDetails;
 
@@ -143,7 +144,7 @@ public class UserDao {
 			int age = rs.getInt("AGE");
 			String state = rs.getString("STATE");
 			String city = rs.getString("CITY");
-			
+			customer = new Customer();
 			customer.setAddress(customerAddress);
 			customer.setAge(age);
 			customer.setCity(city);
@@ -177,7 +178,7 @@ public class UserDao {
 			int age = rs.getInt("AGE");
 			String state = rs.getString("STATE");
 			String city = rs.getString("CITY");
-			
+			customer = new Customer();
 			customer.setAddress(customerAddress);
 			customer.setAge(age);
 			customer.setCity(city);

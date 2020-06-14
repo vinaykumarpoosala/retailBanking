@@ -53,7 +53,7 @@
 									Management </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="executive.jsp">Create
-										Customer</a> <a class="dropdown-item" href="#">Update Customer</a>
+										Customer</a> <a class="dropdown-item" href="search.jsp">Update Customer</a>
 									<a class="dropdown-item" href="#">Delete Customer</a>
 								</div></li>
 						</ul>
@@ -96,7 +96,7 @@
 										class="dropdown-item" href="#">Transfer Amount</a>
 								</div></li>
 						</ul>
-					</a> <a class="nav-item nav-link active text-dark" href="#"> Logout</a>
+					</a> <a class="nav-item nav-link active text-dark" href="Logout">Logout</a>
 
 				</div>
 			</nav>

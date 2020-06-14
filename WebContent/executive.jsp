@@ -10,6 +10,13 @@
 <link href="resources/css/style.css" rel="stylesheet">
 </head>
 <body>
+
+<%
+if(session.getAttribute("TOKEN")==null)
+{
+	response.sendRedirect("login.jsp");
+}
+response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 	<%@ include file="header.jsp" %>
 
 	<br>
@@ -68,23 +75,34 @@
 			</table>
 			<span style="text-align: center; color: red; position: bottom;">All
 				Fields are compulsory</span><br> <br>
-				<span align="center">
-<% String message = (String)request.getAttribute("customerId") ;%>
-<% if(message!="") {%>
-<p><%= message%></p>
-<% } %>
-</span>
+			
 			<div>
 				<input type="hidden" name="action" value="createCustomer">
 				<input type="submit" class="btn btn-dark">
+				
 				<button type="button" class="btn btn-dark pl-2">Reset</button>
 			</div>
 		</form>
+		
+		
+				
 
 	</div>
+	
+	
+<div>	
+<% String message = (String)request.getAttribute("customerId") ;%>
+	<% if(message!="" || message!=null) {%>
+	<span align="center">
+	<p><%= message%></p>
+	</span>
+	<% } %>
 <%@ include file="footer.jsp" %>
+</div>
 
 </body>
+
+
 
 <script type="text/javascript" src="resources/js/cities.js"></script>
 <script language="javascript">
