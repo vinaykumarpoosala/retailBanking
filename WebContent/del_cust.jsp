@@ -19,34 +19,34 @@
 		<table>
 
 				<tr>
-					<th class="label">Customer SSN Id</th>
+					<th class="label">Customer SSN Id</th><td>:</td>
 					<td class="value"><input class="form-control" id="snnid"
 						name="ssnid" type="text" value=""
 						required></td>
 				</tr>
 
 				<tr>
-					<th class="label">Customer Id</th>
+					<th class="label">Customer Id</th><td>:</td>
 					<td class="value"><input class="form-control" id="customerid"
 						name="customerid" type="text" value="db.getUserid() %>"
 						required></td>
 				</tr>
 				
 				<tr>
-					<th class="label">Customer Name</th>
+					<th class="label">Customer Name</th><td>:</td>
 					<td class="value"><input class="form-control" id="customername"
 						name="customername" type="text" value="db.getUsername() %>" ></td>
 				</tr>
 				
 								
 				<tr>
-					<th class="label">Age</th>
+					<th class="label">Age</th><td>:</td>
 					<td class="value"><input class="form-control" id="age"
 						name="age" value="db.getUserage() %>" ></td>
 				</tr>
 				
 				<tr>
-					<th class="label">Customer Address</th>
+					<th class="label">Customer Address</th><td>:</td>
 					<td class="value"><input class="form-control" id="customeraddr"
 						name="customeraddr" type="text" value="db.getUseraddr() %>" ></td>
 				</tr>
@@ -57,7 +57,7 @@
 				<button type="button" class="btn btn-danger">Confirm Delete</button>
 				<button type="button" class="btn btn-info">Cancel</button>
 		</div>
-			
+		<br>
 	</form>
 	</div>
 

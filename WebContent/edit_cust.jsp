@@ -19,51 +19,51 @@
 		<table>
 
 				<tr>
-					<th class="label">Customer SSN Id</th>
+					<th class="label">Customer SSN Id</th><td>:</td>
 					<td class="value"><input class="form-control" id="snnid"
 						name="ssnid" type="text" value="db.getSSNid() %>"
 						required></td>
 				</tr>
 
 				<tr>
-					<th class="label">Customer Id</th>
+					<th class="label">Customer Id</th><td>:</td>
 					<td class="value"><input class="form-control" id="customerid"
 						name="userid" type="text" value="db.getUserid() %>"
 						required></td>
 				</tr>
 				
 				<tr>
-					<th class="label">Old Customer Name</th>
+					<th class="label">Old Customer Name</th><td>:</td>
 					<td class="value"><input class="form-control" id="customername"
 						name="customername" type="text" value="db.getUsername() %>" ></td>
 				</tr>
 				
 				<tr>
-					<th class="label">New Customer Name</th>
+					<th class="label">New Customer Name</th><td>:</td>
 					<td class="value"><input class="form-control" id="customernewname"
 						name="customernewname" type="text" required></td>
 				</tr>
 
 				<tr>
-					<th class="label">Old Customer Address</th>
+					<th class="label">Old Customer Address</th><td>:</td>
 					<td class="value"><input class="form-control" id="customeraddr"
 						name="customername" type="text" value="db.getUseraddr() %>" ></td>
 				</tr>
 				
 				<tr>
-					<th class="label">New Customer Address</th>
+					<th class="label">New Customer Address</th><td>:</td>
 					<td class="value"><input class="form-control" id="customernewname"
 						name="customernewname" type="text" required></td>
 				</tr>
 				
 				<tr>
-					<th class="label">Old Age</th>
+					<th class="label">Old Age</th><td>:</td>
 					<td class="value"><input class="form-control" id="oldage"
 						name="oldage" value="db.getUseraddr() %>" ></td>
 				</tr>
 				
 				<tr>
-					<th class="label">New Age</th>
+					<th class="label">New Age</th><td>:</td>
 					<td class="value"><input class="form-control" id="newage"
 						name="newage" type="number" required></td>
 				</tr>
@@ -73,7 +73,7 @@
 		<div>
 				<button type="button" class="btn btn-success">Update</button>
 		</div>
-			
+		<br>
 	</form>
 	</div>
 

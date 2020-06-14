@@ -60,21 +60,17 @@
 			</div>
 		</main>
 	</div>
+	 <footer>
 	<div class="copyrighttt">
 		<div class="container-fluid">
-			<div class="row">
-
-				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="copyright">
 						<p>
 							<strong>Copyright &copy2020 by ABC Retail Bank</strong>
 						</p>
-					</div>
-				</div>
 			</div>
 		</div>
 	</div>
-
+</footer>
 </body>
 
 </html>
