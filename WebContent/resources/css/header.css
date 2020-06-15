@@ -1,0 +1,27 @@
+@charset "ISO-8859-1";
+
+
+body{
+	background-color:black;
+}
+
+.bank{
+	font-size:2em;
+	font-weight:bold;
+	margin:10px 0 20px 0;
+	color:#fff;
+}
+
+.abc{
+	color:yellow;
+}
+.navbar{
+	margin:0;
+	border:1px solid red;
+	background:yellow;
+
+}
+
+
+
+
