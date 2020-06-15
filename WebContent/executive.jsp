@@ -22,31 +22,31 @@
 			<table>
 
 				<tr>
-					<td class="label">Customer SSN Id</td>
+					<th class="label">Customer SSN Id  </th><td> : </td>
 					<td class="value"><input class="form-control" id="snnid"
-						name="ssnid" type="text" placeholder="1234 1234"
+						name="ssnid" type="text" placeholder="Eg: 1234 1234"
 						required></td>
 				</tr>
 
 				<tr>
-					<td class="label">Customer Name</td>
+					<th class="label">Customer Name  </th><td> : </td>
 					<td class="value"><input class="form-control" id="customer_id"
 						name="customername" type="text" required></td>
 				</tr>
 
 				<tr>
-					<td class="label">Age</td>
+					<th class="label">Age </th><td> : </td>
 					<td class="value"><input class="form-control" id="age"
 						name="age" type="number" required></td>
 				</tr>
 				<tr>
-					<td class="label">Address</td>
+					<th class="label">Address </th><td> : </td>
 					<td class="value"><input class="form-control" id="address"
 						name="address" type="text" required></td>
 				</tr>
 
 				<tr>
-					<td class="label">State</td>
+					<th class="label">State </th><td> : </td>
 					<td class="value"><select
 						onchange="print_city('state', this.selectedIndex);" name="state"
 						id="sts" name="stt" class="form-control" required
@@ -55,7 +55,7 @@
 				</tr>
 
 				<tr>
-					<td class="label">City</td>
+					<th class="label">City </th><td> : </td>
 					<td class="value"><select id="state" class="form-control"
 						name="city" required></select></td>
 				</tr>
@@ -75,13 +75,14 @@
 <% } %>
 </span>
 			<div>
-				<input type="hidden" name="action" value="createCustomer">
-				<input type="submit" class="btn btn-dark">
-				<button type="button" class="btn btn-dark pl-2">Reset</button>
+				<!-- <input type="hidden" name="action" value="createCustomer">
+				<input type="submit" class="btn btn-primary"> -->
+				<button type="submit" class="btn btn-primary" name="action" value="createCustomer">Submit</button>
+				<button type="button" class="btn btn-danger pl-2">Reset</button>
 			</div>
 		</form>
 
-	</div>
+	</div><br>
 <%@ include file="footer.jsp" %>
 
 </body>
@@ -90,7 +91,5 @@
 <script language="javascript">
 	print_state("sts");
 </script>
-
-
 
 </html>
