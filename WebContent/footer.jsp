@@ -10,14 +10,14 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 
-<link href="resources/css/style.css" rel="stylesheet">
+<!-- <link href="resources/css/style.css" rel="stylesheet"> -->
 <title>Insert title here</title>
 </head>
 <body>
-
+<footer>
 	<div class="copyrighttt">
 		<div class="container-fluid">
-			<div class="row copyright">
+			<div class="row copyright m-0">
 				<div class="col-md-5 col-sm-12">
 					<h1>About Us</h1>
 					<p style="text-align: justify;">ABC Bank was founded on 14th
@@ -56,6 +56,15 @@
 		</div>
 
 	</div>
-
+	<div class="copyrighttt">
+		<div class="container-fluid">
+					<div class="copyright">
+						<p>
+							<strong>Copyright &copy2020 by ABC Retail Bank</strong>
+						</p>
+			</div>
+		</div>
+	</div>
+</footer>
 </body>
 </html>

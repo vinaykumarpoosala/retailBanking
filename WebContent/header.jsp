@@ -7,19 +7,9 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-<!-- <link href="resources/css/login.css" rel="stylesheet">
-<link href="resources/css/style.css" rel="stylesheet"> -->
+	
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
 </head>
 
 <body>
@@ -53,8 +43,9 @@
 									Management </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="executive.jsp">Create
-										Customer</a> <a class="dropdown-item" href="search.jsp">Update Customer</a>
-									<a class="dropdown-item" href="#">Delete Customer</a>
+										Customer</a> 
+									<a class="dropdown-item" href="search_update.jsp">Update Customer</a>
+									<a class="dropdown-item" href="search_delete.jsp">Delete Customer</a>
 								</div></li>
 						</ul>
 					</a>
@@ -68,8 +59,8 @@
 								aria-haspopup="true" aria-expanded="false"> Account
 									Management </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">Create Account</a> <a
-										class="dropdown-item" href="#">Delete Account</a>
+									<a class="dropdown-item" href="create_account.jsp">Create Account</a> <a
+										class="dropdown-item" href="AccountController?action=AccountToDelete">Delete Account</a>
 								</div></li>
 						</ul>
 					</a> <a>
@@ -79,7 +70,7 @@
 								id="navbarDropdown" role="button" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false"> Status Details </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">All Accounts</a> <a
+									<a class="dropdown-item" href="UserController?action=customerstatus">Customer status</a> <a
 										class="dropdown-item" href="#">Account Details</a>
 								</div></li>
 						</ul>
@@ -91,16 +82,29 @@
 								aria-haspopup="true" aria-expanded="false"> Account
 									Operations </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<a class="dropdown-item" href="#">Deposit Amount</a> <a
-										class="dropdown-item" href="#">Withdraw Amount</a> <a
-										class="dropdown-item" href="#">Transfer Amount</a>
+									<a class="dropdown-item" href="search_deposit.jsp">Deposit Amount</a> <a
+										class="dropdown-item" href="search_withdraw.jsp">Withdraw Amount</a> <a
+										class="dropdown-item" href="search_transfer.jsp">Transfer Amount</a>
 								</div></li>
 						</ul>
-					</a> <a class="nav-item nav-link active text-dark" href="Logout">Logout</a>
+					</a> <a class="nav-item nav-link active text-dark" href="Logout"> Logout</a>
 
 				</div>
 			</nav>
 		</div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+	
 </body>
 </html>

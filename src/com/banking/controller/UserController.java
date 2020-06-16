@@ -1,9 +1,8 @@
 package com.banking.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.banking.beans.Customer;
+import com.banking.beans.CustomerStatus;
 import com.banking.services.UserService;
 
 @WebServlet("/UserController")
@@ -32,6 +32,51 @@ public class UserController extends HttpServlet {
 		 * if (action.equalsIgnoreCase("logout")) { session.removeAttribute("TOKEN");
 		 * session.invalidate(); response.sendRedirect("login.jsp"); }
 		 */
+		UserService service = new UserService();
+
+		String action = request.getParameter("action");
+		
+		if(action.equalsIgnoreCase("success"))
+		{
+		String loginMessage = request.getParameter("login");
+		String role = request.getParameter("role");
+		if(loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("executive"))
+		{
+			response.sendRedirect("home.jsp");
+		}
+		if(loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("cashier"))
+		{
+			response.sendRedirect("home.jsp");
+		}
+		}
+		
+
+		
+		if(action.equalsIgnoreCase("customerstatus"))
+		{
+			
+		try {
+			List<CustomerStatus> ListOfCustomerStatus = service.findCustomerStatus();
+			
+			if(ListOfCustomerStatus!=null)
+			{
+				
+				request.setAttribute("listOfCustomerStatus", ListOfCustomerStatus);
+				RequestDispatcher rd = request.getRequestDispatcher("customer_status.jsp");
+				rd.forward(request, response);
+				System.out.println("customers found");
+				//response.sendRedirect("executive.jsp");
+			}
+			else
+			{
+				request.setAttribute("message", "No customers found");
+				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+				rd.forward(request, response);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,54 +84,8 @@ public class UserController extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
-		if(action.equalsIgnoreCase("login"))
-		{
-			String userName=request.getParameter("userName");
-			String password = request.getParameter("password");
-			if(userName!=null || password !=null ) 
-			{
-			try {
-				Map<String,String> userRoles = service.validate(userName, password);
-				System.out.println(userRoles);
-				
-				if(userRoles==null || userRoles.isEmpty())
-				{
-					
-					response.sendRedirect("login.jsp");
-				}
-				
-				else
-				{
-					if(userRoles.get("userRole").equalsIgnoreCase("EXCECUTIVE"))
-					{
-						session.setAttribute("TOKEN",userRoles.get("userId"));
-						RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
-					 	rd.forward(request, response);	
-					 	response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
-
-
-					}
-					else
-					{
-					 	response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
-
-						session.setAttribute("TOKEN",userRoles.get("userId"));
-						RequestDispatcher rd = request.getRequestDispatcher("cashier.jsp");
-					 	rd.forward(request, response);
-					}
-					
-				}
-			}
-			 catch (SQLException e) {
-				e.printStackTrace();
-			}
-			}
-			else
-				request.setAttribute("errorMessage","invalid credentials");
-			
-			
-		}
 		
+				
 		
 		
 		
@@ -122,14 +121,14 @@ public class UserController extends HttpServlet {
 				if (customerId=="" || customerId.isEmpty())
 				{
 				System.out.println("Sorry customer not created please try again");
-				request.setAttribute("customerId", "Sorry customer not created please try again");
+				request.setAttribute("message", "Sorry customer not created please try again");
 				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
 				rd.forward(request, response);
 				}
 				else
 				{
 					System.out.println(customerId);
-					request.setAttribute("customerId", customerId);
+					request.setAttribute("message", "customer created with customerId : "+customerId);
 					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
 					rd.forward(request, response);
 				}
@@ -139,14 +138,88 @@ public class UserController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		if(action.equalsIgnoreCase("delete"))
+		{
+			String customerId = request.getParameter("customerId");
+			boolean deleted = false;
+			try {
+				deleted = service.deleteCustomer(customerId);
+				if(!deleted)
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					request.setAttribute("message", "customer Deleted SuccessFully");
+					rd.forward(request, response);
+				
+				}
+				else
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					
+					request.setAttribute("message", "customer Deleted failed");
+					rd.forward(request, response);
+
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
+		
+		
+		if(action.equalsIgnoreCase("update"))
+		{
+			Customer cust = new Customer();
+			String customerId = request.getParameter("customerId");
+			boolean updated;
+			try {
+				cust.setCustomerId(customerId);
+				cust.setAddress(request.getParameter("address"));
+				cust.setAge(Integer.parseInt(request.getParameter("age")));
+				cust.setCustomername(request.getParameter("customername"));
+				System.out.println(cust);
+				updated = service.updateCustomer(cust);
+				if(updated)
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					request.setAttribute("message", "customer updated SuccessFully");
+					rd.forward(request, response);
+
+				
+				}
+				else
+				{
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					request.setAttribute("message", "customer updated failed");
+					rd.forward(request, response);
+
+
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
+
 			
 			
 		
 		
+	}	
 		
 		
 		
-		
-	}
+	
 
 }
+

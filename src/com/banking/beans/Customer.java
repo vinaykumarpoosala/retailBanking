@@ -88,4 +88,13 @@ public class Customer {
 		this.city = city;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", ssnid=" + ssnid + ", customername=" + customername + ", age="
+				+ age + ", address=" + address + ", state=" + state + ", city=" + city + ", deposit=" + deposit
+				+ ", withdraw=" + withdraw + "]";
+	}
+	
+	
+
 }

@@ -14,7 +14,7 @@
 	<div class="rsPgae">
 
 		<h1 style="text-align: center;">Welcome to ABC Banking</h1>
-		<form action="UserController" method="post">
+		<form action="Login" method="post">
 
 			<fieldset>
 				<h3>Login Here</h3>

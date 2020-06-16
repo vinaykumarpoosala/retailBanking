@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
@@ -11,12 +11,15 @@
 </head>
 <body>
 
-<%
-if(session.getAttribute("TOKEN")==null)
+
+<% if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
 {
 	response.sendRedirect("login.jsp");
 }
 response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
+<% String userType = (String)session.getAttribute("USER_TYPE"); %>
+<input type="hidden" id="user_Type" value="<%= userType %>">
+
 	<%@ include file="header.jsp" %>
 
 	<br>
@@ -91,12 +94,11 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 	
 	
 <div>	
-<% String message = (String)request.getAttribute("customerId") ;%>
-	<% if(message!="" || message!=null) {%>
+
 	<span align="center">
-	<p><%= message%></p>
+	<p>${message}</p>
 	</span>
-	<% } %>
+	
 <%@ include file="footer.jsp" %>
 </div>
 

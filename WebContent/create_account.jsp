@@ -16,6 +16,7 @@
 response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 <% String userType = (String)session.getAttribute("USER_TYPE"); %>
 <input type="hidden" id="user_Type" value="<%= userType %>">
+<%@ include file="header.jsp" %>
 
 	<br>
 	<div class="container">
@@ -44,19 +45,19 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 				<tr>
 					<th class="label">Deposit</th><td>:</td>
 					<td class="value"><input class="form-control" id="deposit"
-						name="deposit" type="number" required></td>
+						name="deposit" type="number" required>
+						<input type="hidden" name="action" value="createAccount"></td>
 				</tr>
 				
 		</table>
 		<br>
 		<div>
-				<button type="button" class="btn btn-success">Submit</button>
+				<input type="submit" class="btn btn-success">
 		</div>
 		<br>
 	</form>
 	</div>
 
 <%@ include file="footer.jsp" %>
-
 </body>
 </html>
