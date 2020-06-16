@@ -19,6 +19,8 @@
 	<div>
 
 	<form action="UserController" method="post">
+	<input type="hidden" name="action" value="createCustomer">
+	
 			<table>
 
 				<tr>

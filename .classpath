@@ -17,5 +17,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Rishabh/Downloads/jquery-1.9.1.jar.zip"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -141,9 +141,30 @@ public class UserController extends HttpServlet {
 				customer = service.searchCustomer(searchCreteria);
 				if(customer!=null)
 				{
-					request.setAttribute("customer", customer);
+//					request.setAttribute("customer", customer);
+//					String employeeJsonString = this.gson.toJson(employee);
+//					 
+			   //     PrintWriter out = response.getWriter();
+//			        response.setContentType("application/json");
+//			        response.setCharacterEncoding("UTF-8");
+//			        out.print(employeeJsonString);
+//			        out.flush();
+					response.setContentType("text/plain");
+			        response.setContentLength(12);
+			        PrintWriter ou = response.getWriter();
+			        ou.println("xcvb");
+			       // in.close();
+			        ou.close();
+			        ou.flush();
 				}
 			} catch (SQLException e) {
+				response.setContentType("text/plain");
+		        response.setContentLength(12);
+		        PrintWriter ou = response.getWriter();
+		        ou.println("xcvb");
+		       // in.close();
+		        ou.close();
+		        ou.flush();
 				e.printStackTrace();
 			}
 			
