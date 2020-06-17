@@ -24,18 +24,11 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * response.getWriter().append("Served at: ").append(request.getContextPath());
-		 * HttpSession session = request.getSession(); String action =
-		 * request.getParameter("action");
-		 * 
-		 * if (action.equalsIgnoreCase("logout")) { session.removeAttribute("TOKEN");
-		 * session.invalidate(); response.sendRedirect("login.jsp"); }
-		 */
+		
 		UserService service = new UserService();
 
 		String action = request.getParameter("action");
-		
+//		
 		if(action.equalsIgnoreCase("success"))
 		{
 		String loginMessage = request.getParameter("login");
@@ -50,7 +43,7 @@ public class UserController extends HttpServlet {
 		}
 		}
 		
-
+//
 		
 		if(action.equalsIgnoreCase("customerstatus"))
 		{
@@ -82,9 +75,14 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserService service = new UserService();
 		String action = request.getParameter("action");
-		HttpSession session = request.getSession();
-		
-		
+		HttpSession session  = request.getSession();
+		String token2 = (String)session.getAttribute("TOKEN");
+		System.out.println("this is my token "+token2);
+		if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
+		{
+			response.sendRedirect("login.jsp");
+		}
+		response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
 				
 		
 		

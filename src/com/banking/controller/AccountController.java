@@ -1,6 +1,7 @@
 package com.banking.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,8 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.banking.beans.Account;
+import com.banking.beans.AccountStatus;
+import com.banking.beans.CustomerStatus;
 import com.banking.services.UserService;
 
 
@@ -32,11 +36,40 @@ public class AccountController extends HttpServlet {
 				request.getRequestDispatcher("/del_acc.jsp").include(request, response);
 			}
 		}
+		
+		if(action.equalsIgnoreCase("accountstatus"))
+		{
+			
+		
+			List<AccountStatus> ListOfAccoujntStatus = service.findaccountStatus();
+			
+			if(ListOfAccoujntStatus!=null || ListOfAccoujntStatus.size()>0)
+			{
+				
+				request.setAttribute("ListOfAccountStatus", ListOfAccoujntStatus);
+				RequestDispatcher rd = request.getRequestDispatcher("account_status.jsp");
+				rd.forward(request, response);
+				System.out.println("customers found");
+				//response.sendRedirect("executive.jsp");
+			}
+			else
+			{
+				request.setAttribute("message", "No customers found");
+				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+				rd.forward(request, response);
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//createCustomer
 		UserService service = new UserService();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
+		{
+			response.sendRedirect("login.jsp");
+		}
+		response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
 
 		String action = request.getParameter("action");
 		if(action.equalsIgnoreCase("createAccount"))
@@ -90,6 +123,11 @@ public class AccountController extends HttpServlet {
 			}
 			System.out.println(account_type+" "+account_id);
 		}
+		
+		 
+		
+	
+
 	}
 
 }

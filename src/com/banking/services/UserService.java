@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.banking.beans.Account;
+import com.banking.beans.AccountStatus;
 import com.banking.beans.Customer;
 import com.banking.beans.CustomerStatus;
 import com.banking.dao.UserDao;
@@ -127,16 +128,15 @@ public boolean deleteAccount(String account_id, String account_type) {
 
 
 
-public Account searchAccountBasedOnAccountId(String aCCOUNT_ID) {
+
+
+
+
+public List<AccountStatus> findaccountStatus() {
+	List<AccountStatus> listOfAccountStatus = null;
 	
-	return null;
-}
-
-
-
-public Account searchAccountBasedOnCustomerId(String customerId) {
-	// TODO Auto-generated method stub
-	return null;
+	listOfAccountStatus = dao.findAccountStatus();
+	return listOfAccountStatus;
 }
 
 }

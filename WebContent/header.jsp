@@ -71,7 +71,7 @@
 								aria-haspopup="true" aria-expanded="false"> Status Details </a>
 								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<a class="dropdown-item" href="UserController?action=customerstatus">Customer status</a> <a
-										class="dropdown-item" href="#">Account Details</a>
+										class="dropdown-item" href="AccountController?action=accountstatus">Account Details</a>
 								</div></li>
 						</ul>
 					</a> <a>

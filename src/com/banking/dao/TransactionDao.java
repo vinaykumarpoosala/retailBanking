@@ -177,7 +177,7 @@ public class TransactionDao {
 			if (acc.getAccountType().equalsIgnoreCase(sourceAccountType)) {
 				isamountTransfered = withdrawMoney(acc.getAccountId(), transferAmount, sourceAccountType);
 			} else {
-				isamountTransfered = depositMoney(acc.getAccountId(), transferAmount, sourceAccountType);
+				isamountTransfered = depositMoney(acc.getAccountId(), transferAmount, targetaccountType);
 
 			}
 		}

@@ -1,3 +1,4 @@
+<%@page import="com.banking.beans.AccountStatus"%>
 <%@page import="com.banking.beans.CustomerStatus"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -6,13 +7,20 @@
 <html>
 <head>
 <style>
-
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  
+  
+}
+table
+{
+width: 750px}
 </style>
 <meta charset="ISO-8859-1">
 <title>CustomerStatus</title>
 <link href="resources/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-
 </head>
 <body>
 <% if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
@@ -32,15 +40,15 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
 		<form action="UserController" method="post">
-			<h3>Customer Status</h3>
+			<h3>Account Status</h3>
 			<br>
-		<table id="example" class="display" width="100%" cellspacing="0" >
+		<table id="example" class="display"cellspacing="0">
 			
-			
-				<thead>
+			 <thead>
 				<tr>
 					<th class="label">Customer Id</th>
-					<th class="label">Customer SSN Id</th>
+					<th class="label">Account  Id</th>
+					<th class="label">Account Type</th>
 					<th class="label">Customer Status</th>
 					<th class="label">Customer Message</th>
 					<th class="label">Customer Last Updated</th>
@@ -49,33 +57,40 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 				<tfoot>
 				<tr>
 					<th class="label">Customer Id</th>
-					<th class="label">Customer SSN Id</th>
+					<th class="label">Account  Id</th>
+					<th class="label">Account Type</th>
 					<th class="label">Customer Status</th>
 					<th class="label">Customer Message</th>
 					<th class="label">Customer Last Updated</th>
+				</tr>
 				</tfoot>
 
 				<%
-					List<CustomerStatus> custStatus = (List<CustomerStatus>) request.getAttribute("listOfCustomerStatus");
+					List<AccountStatus> acountStatus = (List<AccountStatus>) request.getAttribute("ListOfAccountStatus");
 				%>
 
 				<%
-					for (CustomerStatus cust : custStatus) {
+					for (AccountStatus cust : acountStatus) {
 				%>
 				<tr>
 					<td><%=cust.getCustomerId()%></td>
-					<td><%=cust.getSsnid()%></td>
+					<td><%=cust.getAccountId()%></td>
+					<td><%=cust.getAccountType() %></td>
 					<td><%=cust.getStatus()%></td>
 					<td><%=cust.getMessage()%></td>
 					<td><%=cust.getLastUpdated()%></td>
 				</tr>
 
-				<%}%>
+				<%
+					}
+				%>
 				<br>
 				
 </table>
 
 </form>
+ 
+
 
 </div><br><hr>
 <script type="text/javascript">
@@ -85,7 +100,8 @@ $(document).ready(function() {
     } );
 } );</script>
 
-<p align="center">
+
+  <p align="center">
         <input type="button" value="Download to PDF" 
             id="btPrint" onclick="createPDF()"  />
     </p>   
@@ -116,6 +132,7 @@ $(document).ready(function() {
         win.print();    // PRINT THE CONTENTS.
     }
 </script>  
+
 
 
 

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.banking.beans.Account;
+import com.banking.beans.AccountStatus;
 import com.banking.beans.Customer;
 import com.banking.beans.CustomerStatus;
 import com.banking.utils.DatabaseUtil;
@@ -22,43 +23,52 @@ public class UserDao {
 
 	Connection con = null;
 
-	public Map<String, String> validate(String uname, String pass) throws SQLException {
+	public Map<String, String> validate(String uname, String pass) {
 		Map<String, String> userDetails = new HashMap<String, String>();
 		String userRole = null;
-		Connection con = util.getConnection();
-		System.out.println(con);
 
-		String userValidationQuery = "select * from USER where USER_NAME=? and PASSWORD =?";
+		try {
+			con = util.getConnection();
+			System.out.println(con);
 
-		PreparedStatement st = con.prepareStatement(userValidationQuery);
-		st.setString(1, uname);
-		st.setString(2, pass);
+			String userValidationQuery = "select * from USER where USER_NAME=? and PASSWORD =?";
 
-		ResultSet rs = st.executeQuery();
+			PreparedStatement st = con.prepareStatement(userValidationQuery);
+			st.setString(1, uname);
+			st.setString(2, pass);
 
-		if (rs.next()) {
-			String userId = rs.getString("USER_ID");
-			String roleId = rs.getString("ROLE_ID");
+			ResultSet rs = st.executeQuery();
 
-			String checkUserRoleQuery = "select ROLE from ROLE where ROLE_ID=?";
+			if (rs.next()) {
+				String userId = rs.getString("USER_ID");
+				String roleId = rs.getString("ROLE_ID");
 
-			st = con.prepareStatement(checkUserRoleQuery);
-			st.setString(1, roleId);
-			rs = st.executeQuery();
-			rs.next();
-			userRole = rs.getString(1);
-			userDetails.put("userId", userId);
-			userDetails.put("userRole", userRole);
-			util.closeConnection();
+				String checkUserRoleQuery = "select ROLE from ROLE where ROLE_ID=?";
 
-			return userDetails;
+				st = con.prepareStatement(checkUserRoleQuery);
+				st.setString(1, roleId);
+				rs = st.executeQuery();
+				rs.next();
+				userRole = rs.getString(1);
+				userDetails.put("userId", userId);
+				userDetails.put("userRole", userRole);
+
+			}
+		} catch (Exception e) {
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return userDetails;
 
 	}
 
-	public String addCustomer(Customer newCustomer, String token) throws SQLException {
+	public String addCustomer(Customer newCustomer, String token) {
 		String customerId = "";
 
 		try {
@@ -115,14 +125,19 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
 		return customerId;
 	}
 
-	public Customer searchCustomerBasedOnCustomerId(String customer_Id) throws SQLException {
+	public Customer searchCustomerBasedOnCustomerId(String customer_Id) {
 		Customer customer = null;
 
 		try {
@@ -157,14 +172,19 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return customer;
 
 	}
 
-	public Customer searchCustomerBasedOnSSNID(String SSNID) throws SQLException {
+	public Customer searchCustomerBasedOnSSNID(String SSNID) {
 		Customer customer = null;
 		try {
 			con = util.getConnection();
@@ -198,7 +218,12 @@ public class UserDao {
 		catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		System.out.println(customer);
 
@@ -257,7 +282,7 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			con.close();
 		}
 
 		return isUpdated;
@@ -308,7 +333,6 @@ public class UserDao {
 			if (rowsEffected) {
 				System.out.println("IN IF");
 
-				
 				String checkForSpecifiedAccountWithAccountType = "SELECT * FROM ACCOUNT_LOGS WHERE CUSTOMER_ID =? and ACCOUNT_TYPE = ?";
 				st = con.prepareStatement(checkForSpecifiedAccountWithAccountType);
 				st.setString(1, account.getCustomerId());
@@ -316,7 +340,7 @@ public class UserDao {
 				rs = st.executeQuery();
 				System.out.println(rs);
 				if (!rs.next()) {
-					
+
 					System.out.println("in if of rs.next");
 
 					String customerInsertionQuery = "INSERT INTO ACCOUNTS(ACCOUNTS_TYPE) VALUES(?)";
@@ -344,7 +368,7 @@ public class UserDao {
 							st = con.prepareStatement(depositQuery);
 							st.setString(1, accountId);
 							st.setLong(2, account.getDeposit());
-							st.executeUpdate();
+							st.execute();
 
 							System.out.println(accountId);
 							// after inserting update ACCOUNT_CUSTOMER TABLE
@@ -369,6 +393,8 @@ public class UserDao {
 							System.out.println(customerLogsQuery);
 
 							st.execute();
+							TransactionDao depositmoney = new TransactionDao();
+							depositmoney.depositMoney(accountId, account.getDeposit(), account.getAccountType());
 						}
 
 					}
@@ -379,7 +405,12 @@ public class UserDao {
 			e.printStackTrace();
 		} finally {
 			System.out.println("in finally bloc");
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 
@@ -442,10 +473,44 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			;
 		}
 
 		return isdeleted;
+
+	}
+
+	public List<AccountStatus> findAccountStatus() {
+		List<AccountStatus> listOfAccountStatus = new ArrayList<AccountStatus>();
+		AccountStatus actStatus = null;
+		con = util.getConnection();
+
+		try {
+
+			String SearchAllAccountStatusQuery = "SELECT * FROM ACCOUNT_LOGS ";
+			PreparedStatement st = con.prepareStatement(SearchAllAccountStatusQuery);
+			ResultSet rs = st.executeQuery();
+			System.out.println(rs);
+			while (rs.next()) {
+
+				actStatus = new AccountStatus(rs.getString("CUSTOMER_ID"), rs.getString("ACCOUNT_ID"),
+						rs.getString("ACCOUNT_TYPE"), rs.getString("STATUS"), rs.getString("MESSAGE"),
+						rs.getTimestamp("LAST_UPDATED").toString());
+
+				listOfAccountStatus.add(actStatus);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			util.closeConnection();
+		}
+		return listOfAccountStatus;
 
 	}
 

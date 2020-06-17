@@ -22,7 +22,7 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 	<div class="container">
 
 	<br>
-	<form action="Search">
+	<form action="Search" method="post">
 		
 			<h3>Search Customer</h3>
 			<br>
