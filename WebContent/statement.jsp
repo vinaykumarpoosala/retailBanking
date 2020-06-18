@@ -1,12 +1,11 @@
-<%@page import="com.banking.beans.AccountStatus"%>
-<%@page import="com.banking.beans.CustomerStatus"%>
+<%@page import="com.banking.beans.TransactionBean"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+<style type="text/css">
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
@@ -17,10 +16,10 @@ table
 {
 width: 750px}
 </style>
-<meta charset="ISO-8859-1">
-<title>CustomerStatus</title>
 <link href="resources/css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<meta charset="ISO-8859-1">
+<title>Account Transaction statement</title>
 </head>
 <body>
 <% if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
@@ -29,69 +28,73 @@ width: 750px}
 }
 response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 <% String userType = (String)session.getAttribute("USER_TYPE"); %>
-<input type="hidden" id="user_Type" value="<%= userType %>">
-	<%@ include file="header.jsp"%>
 
-	<br>
-	<div class="container" id="tab" style="width: 100%">
-	
+<%@ include file="header.jsp" %>
 
+
+
+	<!-- 	<tr>
+					<th class="label">Account Type</th><td>:</td>
+					<td class="value"><input class="form-control" id="account_type"
+						name="account_type"  placeholder="Account type" ></td>
+				</tr>
+				 -->
+				
+		
+		
+		<br>
+		
+<div class="container" id="tab">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-
-			<h3>Account Status</h3>
-			<br>
+		<% List<TransactionBean> transactions = (List)request.getAttribute("transactions");%>
+		<h3 align="center">Account Statement</h3> <p><%= transactions.get(0).getAccount_type() %> account</p>
 		<table id="example" class="display"cellspacing="0">
 			
 			 <thead>
 				<tr>
-					<th class="label">Customer Id</th>
+					<th class="label">TID</th>
 					<th class="label">Account  Id</th>
-					<th class="label">Account Type</th>
-					<th class="label">Customer Status</th>
-					<th class="label">Customer Message</th>
-					<th class="label">Customer Last Updated</th>
+					<th class="label">Amount</th>
+					<th class="label">Transaction Type</th>
+					
+					<th class="label">Transaction time and date</th>
 				</tr>
 				</thead>
 				<tfoot>
 				<tr>
-					<th class="label">Customer Id</th>
+					<th class="label">TID</th>
 					<th class="label">Account  Id</th>
-					<th class="label">Account Type</th>
+					<th class="label">Amount</th>
 					<th class="label">Customer Status</th>
-					<th class="label">Customer Message</th>
-					<th class="label">Customer Last Updated</th>
+					
+					<th class="label">Transaction time and date</th>
 				</tr>
 				</tfoot>
 
-				<%
-					List<AccountStatus> acountStatus = (List<AccountStatus>) request.getAttribute("ListOfAccountStatus");
-				%>
+				
 
 				<%
-					for (AccountStatus cust : acountStatus) {
+					for (TransactionBean transaction : transactions) {
 				%>
 				<tr>
-					<td><%=cust.getCustomerId()%></td>
-					<td><%=cust.getAccountId()%></td>
-					<td><%=cust.getAccountType() %></td>
-					<td><%=cust.getStatus()%></td>
-					<td><%=cust.getMessage()%></td>
-					<td><%=cust.getLastUpdated()%></td>
+					<td><%=transaction.getTID()%></td>
+					<td><%=transaction.getAccount_id()%></td>
+					<td><%=transaction.getAmount() %></td>
+					<td><%=transaction.getTransactionType()%></td>
+					<td><%=transaction.getTransactionDate()%></td>
+					
 				</tr>
 
 				<%
 					}
 				%>
-				
-				
+
 </table>
+</div>
+		
+		<br>
 
-
- 
-
-
-</div><br><hr>
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
@@ -132,10 +135,8 @@ $(document).ready(function() {
     }
 </script>  
 
+<!--  it will work if send data to anoatherpage instead of this page -->
 
-
-
-<%@ include file="footer.jsp"%>
-				
+<%@ include file="footer.jsp" %>
 </body>
 </html>

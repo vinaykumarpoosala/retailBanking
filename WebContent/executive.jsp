@@ -20,6 +20,17 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 <% String userType = (String)session.getAttribute("USER_TYPE"); %>
 <input type="hidden" id="user_Type" value="<%= userType %>">
 
+<script type="text/javascript">
+function ClearFields() {
+
+    document.getElementById("snnid").value = "";
+    document.getElementById("customer_id").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("state").value = "";
+} 
+</script>
+
 	<%@ include file="header.jsp" %>
 
 	<br>
@@ -83,7 +94,8 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 				<input type="hidden" name="action" value="createCustomer">
 				<input type="submit" class="btn btn-dark">
 				
-				<button type="button" class="btn btn-dark pl-2">Reset</button>
+								<button type="button" onclick="ClearFields();" class="btn btn-danger pl-2">Reset</button>
+				
 			</div>
 		</form>
 		

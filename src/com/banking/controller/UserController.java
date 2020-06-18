@@ -24,85 +24,92 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		UserService service = new UserService();
 
 		String action = request.getParameter("action");
-//		
-		if(action.equalsIgnoreCase("success"))
-		{
-		String loginMessage = request.getParameter("login");
-		String role = request.getParameter("role");
-		if(loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("executive"))
-		{
-			response.sendRedirect("home.jsp");
-		}
-		if(loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("cashier"))
-		{
-			response.sendRedirect("home.jsp");
-		}
+		
+		
+		/*
+		 * code for redirecting to page based on user type
+		 */
+		if (action.equalsIgnoreCase("success")) {
+			String loginMessage = request.getParameter("login");
+			String role = request.getParameter("role");
+			if (loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("executive")) {
+				response.sendRedirect("home.jsp");
+			}
+			if (loginMessage.equalsIgnoreCase("success") && role.equalsIgnoreCase("cashier")) {
+				response.sendRedirect("home.jsp");
+			}
 		}
 		
-//
 		
-		if(action.equalsIgnoreCase("customerstatus"))
-		{
-			
-		try {
-			List<CustomerStatus> ListOfCustomerStatus = service.findCustomerStatus();
-			
-			if(ListOfCustomerStatus!=null)
-			{
-				
-				request.setAttribute("listOfCustomerStatus", ListOfCustomerStatus);
-				RequestDispatcher rd = request.getRequestDispatcher("customer_status.jsp");
-				rd.forward(request, response);
-				System.out.println("customers found");
-				//response.sendRedirect("executive.jsp");
+		
+		/*
+		 * code for customer status
+		 */
+
+		if (action.equalsIgnoreCase("customerstatus")) {
+
+			try {
+				List<CustomerStatus> ListOfCustomerStatus = service.findCustomerStatus();
+
+				if (ListOfCustomerStatus != null) {
+
+					request.setAttribute("listOfCustomerStatus", ListOfCustomerStatus);
+					RequestDispatcher rd = request.getRequestDispatcher("customer_status.jsp");
+					rd.forward(request, response);
+					System.out.println("customers found");
+
+				} else {
+					request.setAttribute("message", "No customers found");
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+					rd.forward(request, response);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			else
-			{
-				request.setAttribute("message", "No customers found");
-				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
-				rd.forward(request, response);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		}
 	}
+	
+	
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
 		UserService service = new UserService();
 		String action = request.getParameter("action");
-		HttpSession session  = request.getSession();
-		String token2 = (String)session.getAttribute("TOKEN");
-		System.out.println("this is my token "+token2);
-		if(session.getAttribute("TOKEN")==null || session.getAttribute("TOKEN")=="")
-		{
+		HttpSession session = request.getSession();
+		
+		
+		/*
+		 * checking token
+		 */
+		
+		if (session.getAttribute("TOKEN") == null || session.getAttribute("TOKEN") == "") {
 			response.sendRedirect("login.jsp");
 		}
-		response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");
-				
+		response.setHeader("Cache-Control", "no-cache , no-store,must-revalidate");
 		
 		
-		
-		if(action.equalsIgnoreCase("createcustomer"))
-		{
-			
+
+		/*
+		 * code for customer creation
+		 */
+		if (action.equalsIgnoreCase("createcustomer")) {
+
 			String token = (String) session.getAttribute("TOKEN");
-			
-			
-			String customername=request.getParameter("customername");
-			
+
+			String customername = request.getParameter("customername");
+
 			String ssnid = request.getParameter("ssnid");
 			Integer age = Integer.parseInt(request.getParameter("age"));
 			String city = request.getParameter("city");
 
 			String state = request.getParameter("state");
-			String address=request.getParameter("address");
-			
-			
+			String address = request.getParameter("address");
+
 			System.out.println(customername);
 			System.out.println(ssnid);
 			System.out.println(age);
@@ -111,68 +118,58 @@ public class UserController extends HttpServlet {
 			System.out.println(city);
 			System.out.println(token);
 			Customer newCustomer = new Customer(ssnid, customername, age, address, state, city);
-			try 
-			{
-				
-				String customerId = service.addCustomer(newCustomer,token);
-				
-				if (customerId=="" || customerId.isEmpty())
-				{
-				System.out.println("Sorry customer not created please try again");
-				request.setAttribute("message", "Sorry customer not created please try again");
-				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
-				rd.forward(request, response);
-				}
-				else
-				{
-					System.out.println(customerId);
-					request.setAttribute("message", "customer created with customerId : "+customerId);
+			try {
+
+				String customerId = service.addCustomer(newCustomer, token);
+
+				if (customerId == "" || customerId.isEmpty()) {
+					System.out.println("Sorry customer not created please try again");
+					request.setAttribute("message",
+							"Sorry customer not created please try again | SNNID should be unique");
 					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
 					rd.forward(request, response);
+				} else {
+					System.out.println(customerId);
+					request.setAttribute("message", "customer created with customerId : " + customerId);
+					RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
+					rd.forward(request, response);
 				}
-			} 
-			catch (SQLException e) 
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		if(action.equalsIgnoreCase("delete"))
-		{
+
+		if (action.equalsIgnoreCase("delete")) {
 			String customerId = request.getParameter("customerId");
 			boolean deleted = false;
 			try {
 				deleted = service.deleteCustomer(customerId);
-				if(!deleted)
-				{
-					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+				if (!deleted) {
+					RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 					request.setAttribute("message", "customer Deleted SuccessFully");
 					rd.forward(request, response);
-				
-				}
-				else
-				{
-					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
-					
-					request.setAttribute("message", "customer Deleted failed");
-					rd.forward(request, response);
 
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+
+					request.setAttribute("message", "customer Deleted failed or customer doesn't exists");
+					rd.forward(request, response);
 
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 		
 		
-		
-		
-		if(action.equalsIgnoreCase("update"))
-		{
+		/*
+		 * 
+		 * code for customer update
+		 */
+
+		if (action.equalsIgnoreCase("update")) {
 			Customer cust = new Customer();
 			String customerId = request.getParameter("customerId");
 			boolean updated;
@@ -183,41 +180,23 @@ public class UserController extends HttpServlet {
 				cust.setCustomername(request.getParameter("customername"));
 				System.out.println(cust);
 				updated = service.updateCustomer(cust);
-				if(updated)
-				{
-					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+				if (updated) {
+					RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 					request.setAttribute("message", "customer updated SuccessFully");
 					rd.forward(request, response);
 
-				
-				}
-				else
-				{
+				} else {
 					RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
-					request.setAttribute("message", "customer updated failed");
+					request.setAttribute("message", "customer updation failed");
 					rd.forward(request, response);
-
-
 
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
-		}
-		
-		
 
-			
-			
-		
-		
-	}	
-		
-		
-		
-	
+		}
+
+	}
 
 }
-

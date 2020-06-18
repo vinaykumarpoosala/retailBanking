@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.banking.beans.Account;
+import com.banking.beans.TransactionBean;
 import com.banking.dao.TransactionDao;
 
 
@@ -53,6 +54,12 @@ public class TransactionService {
 		boolean isAmountTransfered = false;
 		isAmountTransfered = dao.transferMoney(customerId,sourceAccountType,targetaccountType,transferAmount);
 		return isAmountTransfered;
+	}
+
+
+	public List<TransactionBean> getTrasaction(String accountId) {
+		 List<TransactionBean> listOfTransaction = dao.getTransaction(accountId);
+		return listOfTransaction;
 	}
 
 }

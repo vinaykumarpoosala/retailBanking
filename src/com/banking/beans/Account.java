@@ -8,6 +8,7 @@ public class Account
 	int deposit;
 	int balance;
 	
+	
 	public  Account(String accountId2, String account_type, int balance2, String customerId2)
 	{
 		this.customerId = customerId2;

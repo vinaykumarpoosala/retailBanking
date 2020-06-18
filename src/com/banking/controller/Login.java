@@ -13,6 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import com.banking.services.UserService;
 
+
+
+//import com.banking.services.UserService;
+
 /**
  * Servlet implementation class Login
  */
@@ -20,31 +24,26 @@ import com.banking.services.UserService;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public Login() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		
 		UserService service = new UserService();
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		if(action.equalsIgnoreCase("login"))
 		{
+			
 			String userName=request.getParameter("userName");
 			String password = request.getParameter("password");
 			if(userName!=null || password !=null ) 
@@ -55,15 +54,20 @@ public class Login extends HttpServlet {
 				
 				if(userRoles==null || userRoles.isEmpty())
 				{
-					
-					response.sendRedirect("login.jsp");
+					System.out.println("in if condition");
+					request.setAttribute("message","invalid credentials");
+					request.getRequestDispatcher("login.jsp").include(request, response);
+
 				}
 				
 				else
 				{
 					if(userRoles.get("userRole").equalsIgnoreCase("EXCECUTIVE"))
 					{
+						//random number base64 shaw256
+						
 						session.setAttribute("TOKEN",userRoles.get("userId"));
+						session.setMaxInactiveInterval(1200);
 						session.setAttribute("USER_TYPE", "EXCECUTIVE");
 						response.sendRedirect("UserController?login=success&role=executive&action=success");
 					 		
@@ -74,6 +78,7 @@ public class Login extends HttpServlet {
 					else
 					{
 						session.setAttribute("USER_TYPE", "CASHIER");
+						session.setMaxInactiveInterval(1200);
 						session.setAttribute("TOKEN",userRoles.get("userId"));
 						response.sendRedirect("UserController?login=success&role=cashier&action=success");
 					 	
@@ -85,9 +90,8 @@ public class Login extends HttpServlet {
 				e.printStackTrace();
 			}
 			}
-			else
-				request.setAttribute("message","invalid credentials");
 			
+							
 			
 		}
 

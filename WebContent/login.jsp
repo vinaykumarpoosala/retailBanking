@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <link href="resources/css/login.css" rel="stylesheet">
 <link href="resources/css/style.css" rel="stylesheet">
 </head>
-<body>
+<body >
 
 <div class="container">
 	<div class="rsPgae">
@@ -19,12 +19,12 @@
 			<fieldset>
 				<h3>Login Here</h3>
 				<hr>
-				<br> <input type="text" name="userName" placeholder="UserName"
+				<br> <input type="text" name="userName" placeholder="UserName" required="required"
 					style="text-align: center;"> <br> <br> <input
 					type="password" name="password" placeholder="Password"
 					style="text-align: center;"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-					title="Must contain at least one uppercase , and at least 8 or more characters"
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}"
+					title="Must contain at least one uppercase , and at least 10 or more characters"
 					required> <br> <br> <input type="submit"
 					value="Login" name="action"> <input type="hidden"
 					name="action" value="login">
@@ -42,8 +42,12 @@
 				</p>
 			</div>
 		</form>
-	</div>
+	</div><br>
+	
+	<p align="center" style="color: red"> ${ message }</p>
 	<script type="text/javascript" src="resources/js/login.js"></script>
+	
+	<br>
 
 	<div class="copyrighttt">
 		<div class="container">

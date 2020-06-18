@@ -23,12 +23,12 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 	<main role="main">
 			<div class="jumbotron">
 				<div class="col-sm-8 mx-auto">
-					<p>
-					
-					</p>
-					
-					<p>${message}</p>
-					
+				<p> You are assigned For <%=userType.toLowerCase() %> Role </p>
+					<span style="text-align: center;"> 
+								<p>
+									<strong>${message}</strong>
+								</p>
+							</span>
 					<br>
 					
 				</div>
@@ -38,4 +38,11 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 
 <%@ include file="footer.jsp" %>
 </body>
+
+<script>
+	sessionStorage.setItem("userType",
+			document.getElementById("user_Type").value);
+	console.log(document.getElementById("user_Type").value)
+</script>
+
 </html>

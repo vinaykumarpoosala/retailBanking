@@ -8,6 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Withdraw</title>
 <link href="resources/css/style.css" rel="stylesheet">
+
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -58,9 +59,9 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 				</tr>
 				
 				<tr>
-					<th class="label">Deposit Amount</th><td>:</td>
+					<th class="label">Withdraw Amount</th><td>:</td>
 					<td class="value"><input class="form-control" id="deposit"
-						name="depositAmount" type="number"  placeholder="Enter Amount" required></td>
+						name="depositAmount" type="number" onKeyup="verify();" placeholder="Enter Amount" required></td>
 				</tr>
 		
 		
@@ -69,11 +70,29 @@ response.setHeader("Cache-Control","no-cache , no-store,must-revalidate");%>
 		<% } %>		
 		<br>
 		<div>
-				<input type="submit" class="btn btn-success" name="action" value="Submit" readonly>
+				<input type="submit" class="btn btn-success" name="action" id="submit" value="Submit" readonly>
 		</div>
 		<br>
 	</form>
 	</div>
+	
+	<script type="text/javascript">
+function verify () {
+	var withdraw =parseInt(document.getElementById("deposit").value); 
+	var dbamount = parseInt(document.getElementById("bal").value);
+	var btnNew = document.getElementById("submit");
+	 console.log(withdraw);
+	    console.log(dbamount)
+	
+	if (  withdraw > dbamount ){
+		btnNew.disabled = true; 
+		
+	}else{
+		btnNew.disabled = false;
+	}
+
+}
+</script>
 
 <%@ include file="footer.jsp" %>
 

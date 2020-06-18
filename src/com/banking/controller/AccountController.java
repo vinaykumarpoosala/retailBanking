@@ -37,6 +37,30 @@ public class AccountController extends HttpServlet {
 			}
 		}
 		
+		if(action.equalsIgnoreCase("accountstatement"))
+		{
+			
+		
+			List<AccountStatus> ListOfAccoujntStatus = service.findaccountStatus();
+			
+			if(ListOfAccoujntStatus!=null || ListOfAccoujntStatus.size()>0)
+			{
+				
+				request.setAttribute("ListOfAccountStatus", ListOfAccoujntStatus);
+				RequestDispatcher rd = request.getRequestDispatcher("account_status.jsp");
+				rd.forward(request, response);
+				System.out.println("customers found");
+				//response.sendRedirect("executive.jsp");
+			}
+			else
+			{
+				request.setAttribute("message", "No customers found");
+				RequestDispatcher rd = request.getRequestDispatcher("executive.jsp");
+				rd.forward(request, response);
+			}
+		}
+		
+		
 		if(action.equalsIgnoreCase("accountstatus"))
 		{
 			

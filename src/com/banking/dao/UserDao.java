@@ -40,8 +40,8 @@ public class UserDao {
 			ResultSet rs = st.executeQuery();
 
 			if (rs.next()) {
-				String userId = rs.getString("USER_ID");
-				String roleId = rs.getString("ROLE_ID");
+				String userId = rs.getString("USER_ID");//u000001
+				String roleId = rs.getString("ROLE_ID");//R000001
 
 				String checkUserRoleQuery = "select ROLE from ROLE where ROLE_ID=?";
 
@@ -72,7 +72,7 @@ public class UserDao {
 		String customerId = "";
 
 		try {
-			Connection con = util.getConnection();
+			con = util.getConnection();
 
 			String customerInsertionQuery = "INSERT INTO CUSTOMER(SSNID,CUSTOMER_NAME,CUSTOMER_ADRESS,AGE,STATE,CITY) VALUES(?,?,?,?,?,?)";
 
@@ -253,7 +253,7 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			con.close();
 		}
 
 		return isdeleted;
@@ -312,7 +312,7 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			con.close();
 		}
 		return listOfCustomerStatus;
 	}
@@ -321,7 +321,7 @@ public class UserDao {
 		String accountId = "";
 
 		try {
-			Connection con = util.getConnection();
+			con = util.getConnection();
 			String searchQuery = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = ?";
 
 			st = con.prepareStatement(searchQuery);
@@ -368,6 +368,7 @@ public class UserDao {
 							st = con.prepareStatement(depositQuery);
 							st.setString(1, accountId);
 							st.setLong(2, account.getDeposit());
+							System.out.println(account.getDeposit());
 							st.execute();
 
 							System.out.println(accountId);
@@ -377,7 +378,7 @@ public class UserDao {
 							st = con.prepareStatement(userCustomerTableQuery);
 							st.setString(1, accountId);
 							st.setString(2, account.getCustomerId());
-							st.executeUpdate();
+							st.execute();
 
 							String status = "ACTIVE";
 							String message = "account Created successfully";
@@ -393,8 +394,7 @@ public class UserDao {
 							System.out.println(customerLogsQuery);
 
 							st.execute();
-							TransactionDao depositmoney = new TransactionDao();
-							depositmoney.depositMoney(accountId, account.getDeposit(), account.getAccountType());
+							
 						}
 
 					}
@@ -433,7 +433,12 @@ public class UserDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.closeConnection();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return listOfAccounts;
 	}
@@ -457,6 +462,7 @@ public class UserDao {
 				String deleteaccountBalance = "DELETE FROM account_balance WHERE ACCOUNT_ID = ?";
 				String deleteUserCustomer = "DELETE FROM ACCOUNT_CUSTOMER WHERE ACCOUNT_ID = ?";
 				String deleteQuery = "DELETE FROM ACCOUNTS WHERE ACCOUNT_ID = ?";
+				String deleteAccountLogs = "DELETE FROM ACCOUNT_LOGS WHERE ACCOUNT_ID=?";
 				st = con.prepareStatement(deleteaccountBalance);
 				st.setString(1, account_id);
 				st.execute();
@@ -464,6 +470,9 @@ public class UserDao {
 				st.setString(1, account_id);
 				st.execute();
 				st = con.prepareStatement(deleteQuery);
+				st.setString(1, account_id);
+				st.execute();
+				st = con.prepareStatement(deleteAccountLogs);
 				st.setString(1, account_id);
 				isdeleted = st.execute();
 
